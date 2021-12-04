@@ -1,0 +1,25 @@
+{
+    "name": "q-language-highlighter",
+    "displayName": "Q Language Highlighter",
+    "description": "A basic syntax highlighting for the Q Language, which is used in various Neversoft Games.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.62.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "qlang",
+            "aliases": ["Q", "qlang"],
+            "extensions": [".q"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "qlang",
+            "scopeName": "source.q",
+            "path": "./syntaxes/qlang.tmLanguage.json"
+        }]
+    }
+}

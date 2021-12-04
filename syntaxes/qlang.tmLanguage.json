@@ -1,0 +1,100 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Q",
+  "patterns": [
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#references"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.qlang",
+          "match": "\\b(if|while|for|return)\\b"
+        }
+      ]
+    },
+    "references": {
+      "patterns": [
+        {
+          "name": "variable.local",
+          "match": "<[A-Za-z_][A-Za-z_0-9]*>"
+        },
+        {
+          "name": "variable.allargs",
+          "match": "<...>"
+        }
+      ]
+    },
+    "doublestrings": {
+      "name": "string.quoted.double",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.color",
+          "match": "\\\\c[a-g_0-9]"
+        },
+        {
+          "name": "constant.button",
+          "match": "\\\\b[a-z_0-9]"
+        },
+        {
+          "name": "constant.meta",
+          "match": "\\\\m[a-g_0-9]"
+        },
+        {
+          "name": "constant.newline",
+          "match": "\\\\n"
+        },
+        {
+          "name": "constant.pathseparator",
+          "match": "\\\\\\\\"
+        },
+        {
+          "name": "constant.placeholder",
+          "match": "%[A-Za-z_]"
+        }
+      ]
+    },
+    "singlestrings": {
+      "name": "string.quoted.double",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.color",
+          "match": "\\\\c[a-g_0-9]"
+        },
+        {
+          "name": "constant.button",
+          "match": "\\\\b[a-z_0-9]"
+        },
+        {
+          "name": "constant.meta",
+          "match": "\\\\m[a-g_0-9]"
+        },
+        {
+          "name": "constant.newline",
+          "match": "\\\\n"
+        },
+        {
+          "name": "constant.pathseparator",
+          "match": "\\\\\\\\"
+        },
+        {
+          "name": "constant.placeholder",
+          "match": "%[A-Za-z_]"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.q"
+}
