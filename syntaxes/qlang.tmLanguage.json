@@ -19,6 +19,9 @@
     },
     {
       "include": "#keywords"
+    },
+    {
+      "include": "#meta"
     }
   ],
   "repository": {
@@ -75,7 +78,7 @@
           "match": "\\\\n"
         },
         {
-          "name": "constant.other.qlang",
+          "name": "constant.language.qlang",
           "match": "\\\\\\\\"
         },
         {
@@ -102,19 +105,69 @@
       "end": "$\n?",
       "patterns": [
         {
-          "name": "invalid.illegal.qlang",
-          "match": "\\b(WARNING\\(|WARN\\(|ERROR\\(|BUG\\(|BUGS\\(|BUGGED\\()\\b"
+          "match": "\\b(WARNING\\(|WARN\\(|ERROR\\(|BUG\\(|BUGS\\(|BUGGED\\()(.*)(\\))(?!\\w)",
+          "captures": {
+            "1": {
+							"name": "invalid.illegal.qlang"
+						},
+						"2": {
+							"name": "constant.other.placeholder.qlang"
+						},
+            "3": {
+							"name": "invalid.illegal.qlang"
+						}
+          }
         },
         {
-          "name": "invalid.depricated.qlang",
-          "match": "\\b(TODO\\(|NOTE\\(|NOTES\\(|OPTI\\(|OPT\\(|OPTIMIZE\\(|CLEANUP\\()\\b"
+          "match": "\\b(TODO\\(|NOTE\\(|NOTES\\(|CLEANUP\\(|OPTI\\(|OPT\\(|OPTIMIZE\\()(.*)(\\))(?!\\w)",
+          "captures": {
+            "1": {
+							"name": "invalid.depricated.qlang"
+						},
+						"2": {
+							"name": "constant.other.placeholder.qlang"
+						},
+            "3": {
+							"name": "invalid.depricated.qlang"
+						}
+          }
         }
       ]
     },
     "comments-block": {
       "name": "comment.block.qlang",
       "begin": "(?<!\/)/\\*",
-      "end": "\\*/"
+      "end": "\\*/",
+      "patterns": [
+        {
+          "match": "\\b(WARNING\\(|WARN\\(|ERROR\\(|BUG\\(|BUGS\\(|BUGGED\\()(.*)(\\))(?!\\w)",
+          "captures": {
+            "1": {
+							"name": "invalid.illegal.qlang"
+						},
+						"2": {
+							"name": "constant.other.placeholder.qlang"
+						},
+            "3": {
+							"name": "invalid.illegal.qlang"
+						}
+          }
+        },
+        {
+          "match": "\\b(TODO\\(|NOTE\\(|NOTES\\(|CLEANUP\\(|OPTI\\(|OPT\\(|OPTIMIZE\\()(.*)(\\))(?!\\w)",
+          "captures": {
+            "1": {
+							"name": "invalid.depricated.qlang"
+						},
+						"2": {
+							"name": "constant.other.placeholder.qlang"
+						},
+            "3": {
+							"name": "invalid.depricated.qlang"
+						}
+          }
+        }
+      ]
     },
     "keywords": {
       "patterns": [
@@ -124,7 +177,7 @@
         },
         {
           "name": "keyword.operator.qlang keyword.other.operator.qlang",
-          "match": "\\||&"
+          "match": "\\||&|OR|AND|NOT"
         },
         {
           "name": "keyword.operator.qlang keyword.other.operator.qlang",
@@ -133,10 +186,6 @@
         {
           "name": "keyword.operator.qlang keyword.other.operator.qlang",
           "match": "="
-        },
-        {
-          "name": "keyword.operator.qlang keyword.operator.wordlike.qlang",
-          "match": "\\b(OR|AND|NOT)\\b"
         },
         {
           "name": "constant.language.qlang",
@@ -154,7 +203,7 @@
           }
         },
         {
-          "match": "\\b(script *|endscript)\\b",
+          "match": "\\bendscript\\b",
           "name": "entity.name.function.qlang"
         },
         {
