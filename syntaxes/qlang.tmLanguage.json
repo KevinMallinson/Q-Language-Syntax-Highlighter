@@ -3,95 +3,190 @@
   "name": "Q",
   "patterns": [
     {
-      "include": "#strings"
+      "include": "#string-double"
+    },
+    {
+      "include": "#string-single"
+    },
+    {
+      "include": "#references"
     },
     {
       "include": "#comments"
     },
     {
-      "include": "#references"
+      "include": "#comments-block"
+    },
+    {
+      "include": "#keywords"
     }
   ],
   "repository": {
-    "keywords": {
+    "string-double": {
+      "name": "string.quoted.double.qlang",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "name": "keyword.control.qlang",
-          "match": "\\b(if|while|for|return)\\b"
+          "name": "constant.language.qlang",
+          "match": "\\\\c[a-g_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\b[a-z_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\m[a-g_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\n"
+        },
+        {
+          "name": "constant.other.qlang",
+          "match": "\\\\\\\\"
+        },
+        {
+          "name": "constant.other.placeholder.qlang",
+          "match": "%[A-Za-z_]"
+        }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.qlang",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\c[a-g_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\b[a-z_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\m[a-g_0-9]"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\\\n"
+        },
+        {
+          "name": "constant.other.qlang",
+          "match": "\\\\\\\\"
+        },
+        {
+          "name": "constant.other.placeholder.qlang",
+          "match": "%[A-Za-z_]"
         }
       ]
     },
     "references": {
       "patterns": [
         {
-          "name": "variable.local",
+          "name": "variable.language.qlang",
           "match": "<[A-Za-z_][A-Za-z_0-9]*>"
         },
         {
-          "name": "variable.allargs",
+          "name": "variable.language.qlang",
           "match": "<...>"
         }
       ]
     },
-    "doublestrings": {
-      "name": "string.quoted.double",
-      "begin": "\"",
-      "end": "\"",
+    "comments": {
+      "name": "comment.line.qlang",
+      "begin": "(//|;)",
+      "end": "$\n?",
       "patterns": [
         {
-          "name": "constant.color",
-          "match": "\\\\c[a-g_0-9]"
+          "name": "invalid.illegal.qlang",
+          "match": "\\b(WARNING\\(|WARN\\(|ERROR\\(|BUG\\(|BUGS\\(|BUGGED\\()\\b"
         },
         {
-          "name": "constant.button",
-          "match": "\\\\b[a-z_0-9]"
-        },
-        {
-          "name": "constant.meta",
-          "match": "\\\\m[a-g_0-9]"
-        },
-        {
-          "name": "constant.newline",
-          "match": "\\\\n"
-        },
-        {
-          "name": "constant.pathseparator",
-          "match": "\\\\\\\\"
-        },
-        {
-          "name": "constant.placeholder",
-          "match": "%[A-Za-z_]"
+          "name": "invalid.depricated.qlang",
+          "match": "\\b(TODO\\(|NOTE\\(|NOTES\\(|OPTI\\(|OPT\\(|OPTIMIZE\\(|CLEANUP\\()\\b"
         }
       ]
     },
-    "singlestrings": {
-      "name": "string.quoted.double",
-      "begin": "'",
-      "end": "'",
+    "comments-block": {
+      "name": "comment.block.qlang",
+      "begin": "(?<!\/)/\\*",
+      "end": "\\*/"
+    },
+    "keywords": {
       "patterns": [
         {
-          "name": "constant.color",
-          "match": "\\\\c[a-g_0-9]"
+          "name": "keyword.control.qlang",
+          "match": "\\b(if|else|endif|for|while|repeat|return|break|switch|endswitch|case |default)\\b"
         },
         {
-          "name": "constant.button",
-          "match": "\\\\b[a-z_0-9]"
+          "name": "keyword.operator.qlang keyword.other.operator.qlang",
+          "match": "\\||&"
         },
         {
-          "name": "constant.meta",
-          "match": "\\\\m[a-g_0-9]"
+          "name": "keyword.operator.qlang keyword.other.operator.qlang",
+          "match": "\\+|\\-|\\*|\\/|\\<|\\>"
         },
         {
-          "name": "constant.newline",
-          "match": "\\\\n"
+          "name": "keyword.operator.qlang keyword.other.operator.qlang",
+          "match": "="
         },
         {
-          "name": "constant.pathseparator",
-          "match": "\\\\\\\\"
+          "name": "keyword.operator.qlang keyword.operator.wordlike.qlang",
+          "match": "\\b(OR|AND|NOT)\\b"
         },
         {
-          "name": "constant.placeholder",
-          "match": "%[A-Za-z_]"
+          "name": "constant.language.qlang",
+          "match": "\\b(Random|RandomRange)\\b"
+        },
+        {
+          "match": "\\b(script *)\\b(.+)\\b",
+          "captures": {
+            "1": {
+							"name": "entity.name.function.qlang"
+						},
+						"2": {
+							"name": "markup.underline"
+						}
+          }
+        },
+        {
+          "match": "\\b(script *|endscript)\\b",
+          "name": "entity.name.function.qlang"
+        },
+        {
+          "name": "entity.name.class.qlang",
+          "match": "{|}"
+        },
+        {
+          "name": "entity.name.class.qlang",
+          "match": "\\(|\\)"
+        },
+        {
+          "name": "entity.name.class.qlang",
+          "match": "\\[|\\]"
+        },
+        {
+          "name": "constant.numeric.qlang",
+          "match": "\\b[0-9]+\\b"
+        },
+        {
+          "name": "constant.language.qlang",
+          "match": "\\@"
+        }
+      ]
+    },
+    "meta": {
+      "name": "meta.preprocessor punctuation.definition.annotation.qlang",
+      "begin": "#",
+      "end": "$\n?",
+      "patterns": [
+        {
+          "name": "keyword.control.qlang",
+          "match": "\\b(ifdef|ifndef|else|endif|define|include)\\b"
         }
       ]
     }
